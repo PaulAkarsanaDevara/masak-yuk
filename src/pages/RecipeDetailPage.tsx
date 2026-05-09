@@ -124,6 +124,9 @@ export default function RecipeDetailPage() {
           src={currentMeal.strMealThumb}
           alt={currentMeal.strMeal}
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/25" />
 
@@ -288,6 +291,9 @@ export default function RecipeDetailPage() {
                   src={currentMeal.strMealThumb}
                   alt={currentMeal.strMeal}
                   className="w-full h-full object-cover"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
               </div>
 

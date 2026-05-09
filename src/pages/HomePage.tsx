@@ -178,6 +178,9 @@ export default function HomePage() {
                 src={randomMeal.strMealThumb}
                 alt={randomMeal.strMeal}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
@@ -216,6 +219,10 @@ export default function HomePage() {
                   src={cat.strCategoryThumb}
                   alt=""
                   className="w-5 h-5 object-cover rounded-full"
+                  loading="lazy"
+                  decoding="async"
+                  width={20}
+                  height={20}
                 />
                 {cat.strCategory}
               </button>

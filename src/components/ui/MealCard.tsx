@@ -26,10 +26,13 @@ export default function MealCard({ meal, index = 0 }: MealCardProps) {
     >
       <div className="relative overflow-hidden aspect-[4/3]">
         <img
-          src={meal.strMealThumb}
+          src={`${meal.strMealThumb}/preview`}
           alt={meal.strMeal}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          decoding="async"
+          width={220}
+          height={165}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
         <button
