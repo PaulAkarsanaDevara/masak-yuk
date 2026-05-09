@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { store } from './store';
 import Navbar from './components/layout/Navbar';
+import InstallPrompt from './components/ui/InstallPrompt';
+import OfflineBar from './components/ui/OfflineBar';
+import UpdatePrompt from './components/ui/UpdatePrompt';
 import { DarkModeProvider } from './context/DarkModeContext';
 import './index.css';
 
@@ -26,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <DarkModeProvider>
+        <OfflineBar />
         <BrowserRouter>
           <Routes>
             <Route
@@ -67,6 +71,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/recipe/:id" element={<RecipeDetailPage />} />
           </Routes>
         </BrowserRouter>
+        <InstallPrompt />
+        <UpdatePrompt />
       </DarkModeProvider>
     </Provider>
   </React.StrictMode>,
