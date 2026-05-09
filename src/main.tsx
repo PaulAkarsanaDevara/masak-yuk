@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { store } from './store';
 import Navbar from './components/layout/Navbar';
+import { DarkModeProvider } from './context/DarkModeContext';
 import './index.css';
 
 const Loading = () => (
@@ -24,47 +25,49 @@ const RecipeDetailPage = loadable(() => import('./pages/RecipeDetailPage'), fall
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <HomePage />
-                <Navbar />
-              </>
-            }
-          />
-          <Route
-            path="/search"
-            element={
-              <>
-                <SearchPage />
-                <Navbar />
-              </>
-            }
-          />
-          <Route
-            path="/ingredients"
-            element={
-              <>
-                <IngredientsPage />
-                <Navbar />
-              </>
-            }
-          />
-          <Route
-            path="/favorites"
-            element={
-              <>
-                <FavoritesPage />
-                <Navbar />
-              </>
-            }
-          />
-          <Route path="/recipe/:id" element={<RecipeDetailPage />} />
-        </Routes>
-      </BrowserRouter>
+      <DarkModeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <HomePage />
+                  <Navbar />
+                </>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <>
+                  <SearchPage />
+                  <Navbar />
+                </>
+              }
+            />
+            <Route
+              path="/ingredients"
+              element={
+                <>
+                  <IngredientsPage />
+                  <Navbar />
+                </>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <>
+                  <FavoritesPage />
+                  <Navbar />
+                </>
+              }
+            />
+            <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+          </Routes>
+        </BrowserRouter>
+      </DarkModeProvider>
     </Provider>
   </React.StrictMode>,
 );

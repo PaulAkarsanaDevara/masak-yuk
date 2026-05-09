@@ -34,14 +34,14 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface pb-24 md:pb-10">
+    <div className="min-h-screen bg-surface dark:bg-zinc-900 pb-24 md:pb-10">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="px-5 md:px-8 pt-12 md:pt-24 pb-6">
-          <p className="font-body text-ink-muted text-sm mb-1 tracking-wide">
+          <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mb-1 tracking-wide">
             Selamat datang 👋
           </p>
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-ink leading-tight">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-ink dark:text-zinc-100 leading-tight">
             Mau masak
             <br />
             <span className="text-brand-600 italic">apa hari ini?</span>
@@ -52,10 +52,11 @@ export default function HomePage() {
         <div className="px-5 md:px-8 mb-6 grid grid-cols-2 md:grid-cols-4 gap-3">
           <button
             onClick={() => navigate('/search')}
-            className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-card
-                       hover:border-brand-200 hover:shadow-card-hover transition-all duration-200"
+            className="flex items-center gap-3 bg-white dark:bg-zinc-800 rounded-2xl p-4
+                       border border-gray-100 dark:border-zinc-700 shadow-card
+                       hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-card-hover transition-all duration-200"
           >
-            <div className="w-10 h-10 bg-brand-50 rounded-xl flex items-center justify-center flex-none">
+            <div className="w-10 h-10 bg-brand-50 dark:bg-brand-900/40 rounded-xl flex items-center justify-center flex-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 text-brand-600"
@@ -72,10 +73,10 @@ export default function HomePage() {
               </svg>
             </div>
             <div className="text-left">
-              <p className="font-body font-semibold text-ink text-sm">
+              <p className="font-body font-semibold text-ink dark:text-zinc-100 text-sm">
                 Cari Resep
               </p>
-              <p className="font-body text-ink-faint text-xs">By nama</p>
+              <p className="font-body text-ink-faint dark:text-zinc-500 text-xs">By nama</p>
             </div>
           </button>
           <button
@@ -108,10 +109,11 @@ export default function HomePage() {
           </button>
           <button
             onClick={() => navigate('/favorites')}
-            className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-card
-                       hover:border-rose-200 hover:shadow-card-hover transition-all duration-200"
+            className="flex items-center gap-3 bg-white dark:bg-zinc-800 rounded-2xl p-4
+                       border border-gray-100 dark:border-zinc-700 shadow-card
+                       hover:border-rose-200 dark:hover:border-rose-800 hover:shadow-card-hover transition-all duration-200"
           >
-            <div className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center flex-none">
+            <div className="w-10 h-10 bg-rose-50 dark:bg-rose-900/30 rounded-xl flex items-center justify-center flex-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 text-rose-500"
@@ -128,20 +130,21 @@ export default function HomePage() {
               </svg>
             </div>
             <div className="text-left">
-              <p className="font-body font-semibold text-ink text-sm">
+              <p className="font-body font-semibold text-ink dark:text-zinc-100 text-sm">
                 Favorit
               </p>
-              <p className="font-body text-ink-faint text-xs">Tersimpan</p>
+              <p className="font-body text-ink-faint dark:text-zinc-500 text-xs">Tersimpan</p>
             </div>
           </button>
           <button
             onClick={() => {
               dispatch(fetchRandom());
             }}
-            className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-card
-                       hover:border-accent-200 hover:shadow-card-hover transition-all duration-200"
+            className="flex items-center gap-3 bg-white dark:bg-zinc-800 rounded-2xl p-4
+                       border border-gray-100 dark:border-zinc-700 shadow-card
+                       hover:border-accent-200 dark:hover:border-accent-700 hover:shadow-card-hover transition-all duration-200"
           >
-            <div className="w-10 h-10 bg-accent-50 rounded-xl flex items-center justify-center flex-none">
+            <div className="w-10 h-10 bg-accent-50 dark:bg-accent-900/30 rounded-xl flex items-center justify-center flex-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 text-accent-500"
@@ -158,8 +161,8 @@ export default function HomePage() {
               </svg>
             </div>
             <div className="text-left">
-              <p className="font-body font-semibold text-ink text-sm">Acak</p>
-              <p className="font-body text-ink-faint text-xs">Surprise me</p>
+              <p className="font-body font-semibold text-ink dark:text-zinc-100 text-sm">Acak</p>
+              <p className="font-body text-ink-faint dark:text-zinc-500 text-xs">Surprise me</p>
             </div>
           </button>
         </div>
@@ -167,7 +170,7 @@ export default function HomePage() {
         {/* Random Meal Hero */}
         {randomMeal && (
           <div className="px-5 md:px-8 mb-6">
-            <p className="font-body text-xs text-ink-muted font-medium uppercase tracking-widest mb-3">
+            <p className="font-body text-xs text-ink-muted dark:text-zinc-400 font-medium uppercase tracking-widest mb-3">
               Resep Acak
             </p>
             <div
@@ -200,7 +203,7 @@ export default function HomePage() {
 
         {/* Categories */}
         <div className="mb-4">
-          <p className="font-body text-xs text-ink-muted font-medium uppercase tracking-widest mb-3 px-5 md:px-8">
+          <p className="font-body text-xs text-ink-muted dark:text-zinc-400 font-medium uppercase tracking-widest mb-3 px-5 md:px-8">
             Kategori
           </p>
           <div className="flex gap-2 overflow-x-auto px-5 md:px-8 pb-1 scrollbar-none">
@@ -212,7 +215,7 @@ export default function HomePage() {
                   ${
                     activeCategory === cat.strCategory
                       ? 'bg-brand-600 text-white shadow-md scale-[1.03]'
-                      : 'bg-white text-ink-muted border border-gray-100 shadow-card hover:border-brand-200 hover:shadow-card-hover'
+                      : 'bg-white dark:bg-zinc-800 text-ink-muted dark:text-zinc-400 border border-gray-100 dark:border-zinc-700 shadow-card hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-card-hover'
                   }`}
               >
                 <img
@@ -237,11 +240,11 @@ export default function HomePage() {
               {Array.from({ length: 8 }).map((_, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-card animate-pulse"
+                  className="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-zinc-700 shadow-card animate-pulse"
                 >
-                  <div className="aspect-[4/3] bg-gray-100" />
+                  <div className="aspect-[4/3] bg-gray-100 dark:bg-zinc-700" />
                   <div className="p-3.5">
-                    <div className="h-4 bg-gray-100 rounded w-3/4" />
+                    <div className="h-4 bg-gray-100 dark:bg-zinc-700 rounded w-3/4" />
                   </div>
                 </div>
               ))}

@@ -33,16 +33,16 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface pb-24 md:pb-10">
+    <div className="min-h-screen bg-surface dark:bg-zinc-900 pb-24 md:pb-10">
       <div className="max-w-6xl mx-auto">
         <div className="px-5 md:px-8 pt-12 md:pt-24 pb-4">
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-ink mb-4">
+          <h1 className="font-display text-2xl md:text-4xl font-bold text-ink dark:text-zinc-100 mb-4">
             Cari Resep
           </h1>
           <form onSubmit={handleSubmit} className="relative max-w-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-faint"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-faint dark:text-zinc-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -60,8 +60,12 @@ export default function SearchPage() {
               value={input}
               onChange={(e) => handleChange(e.target.value)}
               placeholder="Cari nama resep... (min. 2 karakter)"
-              className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl font-body text-sm text-ink shadow-card
-                         placeholder:text-ink-faint focus:outline-none focus:border-brand-300 focus:ring-2 focus:ring-brand-100 transition-all"
+              className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-zinc-800
+                         border border-gray-100 dark:border-zinc-700 rounded-2xl
+                         font-body text-sm text-ink dark:text-zinc-100 shadow-card
+                         placeholder:text-ink-faint dark:placeholder:text-zinc-500
+                         focus:outline-none focus:border-brand-300 dark:focus:border-brand-600
+                         focus:ring-2 focus:ring-brand-100 dark:focus:ring-brand-900/50 transition-all"
             />
             {input && (
               <button
@@ -70,7 +74,7 @@ export default function SearchPage() {
                   setInput('');
                   dispatch(setSearchQuery(''));
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink-muted transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint dark:text-zinc-500 hover:text-ink-muted dark:hover:text-zinc-300 transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -97,11 +101,11 @@ export default function SearchPage() {
               {Array.from({ length: 8 }).map((_, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-card animate-pulse"
+                  className="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-zinc-700 shadow-card animate-pulse"
                 >
-                  <div className="aspect-[4/3] bg-gray-100" />
+                  <div className="aspect-[4/3] bg-gray-100 dark:bg-zinc-700" />
                   <div className="p-3.5">
-                    <div className="h-4 bg-gray-100 rounded w-3/4" />
+                    <div className="h-4 bg-gray-100 dark:bg-zinc-700 rounded w-3/4" />
                   </div>
                 </div>
               ))}
@@ -111,15 +115,15 @@ export default function SearchPage() {
           {!loading.search && input && searchResults.length === 0 && (
             <div className="text-center py-16">
               <div className="relative w-20 h-20 mx-auto mb-5">
-                <div className="absolute inset-0 bg-gray-100 rounded-full" />
+                <div className="absolute inset-0 bg-gray-100 dark:bg-zinc-700 rounded-full" />
                 <div className="absolute inset-0 flex items-center justify-center text-4xl">
                   🍽️
                 </div>
               </div>
-              <p className="font-body font-semibold text-ink">
+              <p className="font-body font-semibold text-ink dark:text-zinc-100">
                 Resep tidak ditemukan
               </p>
-              <p className="font-body text-ink-muted text-sm mt-1">
+              <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mt-1">
                 Coba kata kunci lain
               </p>
             </div>
@@ -127,8 +131,8 @@ export default function SearchPage() {
 
           {!loading.search && searchResults.length > 0 && (
             <>
-              <p className="font-body text-sm text-ink-muted mb-3">
-                <span className="font-semibold text-ink">
+              <p className="font-body text-sm text-ink-muted dark:text-zinc-400 mb-3">
+                <span className="font-semibold text-ink dark:text-zinc-100">
                   {searchResults.length}
                 </span>{' '}
                 resep ditemukan
@@ -144,8 +148,8 @@ export default function SearchPage() {
           {!input && (
             <div className="text-center py-16">
               <div className="relative w-24 h-24 mx-auto mb-5">
-                <div className="absolute inset-0 bg-brand-50 rounded-full" />
-                <div className="absolute inset-2 bg-brand-100 rounded-full" />
+                <div className="absolute inset-0 bg-brand-50 dark:bg-brand-900/30 rounded-full" />
+                <div className="absolute inset-2 bg-brand-100 dark:bg-brand-800/40 rounded-full" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -163,10 +167,10 @@ export default function SearchPage() {
                   </svg>
                 </div>
               </div>
-              <p className="font-body font-semibold text-ink">
+              <p className="font-body font-semibold text-ink dark:text-zinc-100">
                 Ketik nama resep
               </p>
-              <p className="font-body text-ink-muted text-sm mt-1">
+              <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mt-1">
                 Contoh: Chicken, Pasta, Sushi
               </p>
               <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -174,7 +178,9 @@ export default function SearchPage() {
                   <button
                     key={hint}
                     onClick={() => handleChange(hint)}
-                    className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-body font-medium text-ink-muted shadow-card hover:border-brand-300 hover:text-brand-700 transition-all"
+                    className="px-3 py-1.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-600 rounded-full
+                               text-xs font-body font-medium text-ink-muted dark:text-zinc-400 shadow-card
+                               hover:border-brand-300 dark:hover:border-brand-600 hover:text-brand-700 dark:hover:text-brand-400 transition-all"
                   >
                     {hint}
                   </button>

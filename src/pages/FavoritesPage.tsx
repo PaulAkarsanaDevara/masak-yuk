@@ -9,15 +9,15 @@ export default function FavoritesPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-surface pb-24 md:pb-10">
+    <div className="min-h-screen bg-surface dark:bg-zinc-900 pb-24 md:pb-10">
       <div className="max-w-6xl mx-auto">
         <div className="px-5 md:px-8 pt-12 md:pt-24 pb-6 flex items-center justify-between">
           <div>
-            <h1 className="font-display text-2xl md:text-4xl font-bold text-ink">
+            <h1 className="font-display text-2xl md:text-4xl font-bold text-ink dark:text-zinc-100">
               Favorit Saya
             </h1>
-            <p className="font-body text-sm text-ink-muted mt-0.5">
-              <span className="font-semibold text-ink">{favorites.length}</span>{' '}
+            <p className="font-body text-sm text-ink-muted dark:text-zinc-400 mt-0.5">
+              <span className="font-semibold text-ink dark:text-zinc-100">{favorites.length}</span>{' '}
               resep tersimpan
             </p>
           </div>
@@ -39,8 +39,8 @@ export default function FavoritesPage() {
           {favorites.length === 0 ? (
             <div className="text-center py-16">
               <div className="relative w-28 h-28 mx-auto mb-6">
-                <div className="absolute inset-0 bg-rose-50 rounded-full" />
-                <div className="absolute inset-3 bg-rose-100 rounded-full" />
+                <div className="absolute inset-0 bg-rose-50 dark:bg-rose-900/20 rounded-full" />
+                <div className="absolute inset-3 bg-rose-100 dark:bg-rose-900/30 rounded-full" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +58,10 @@ export default function FavoritesPage() {
                   </svg>
                 </div>
               </div>
-              <p className="font-body font-semibold text-ink mb-1.5">
+              <p className="font-body font-semibold text-ink dark:text-zinc-100 mb-1.5">
                 Belum ada favorit
               </p>
-              <p className="font-body text-ink-muted text-sm mb-6">
+              <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mb-6">
                 Tap ikon hati di resep untuk menyimpannya
               </p>
               <button

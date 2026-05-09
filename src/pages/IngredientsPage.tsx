@@ -49,13 +49,13 @@ export default function IngredientsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface pb-24 md:pb-10">
+    <div className="min-h-screen bg-surface dark:bg-zinc-900 pb-24 md:pb-10">
       <div className="max-w-6xl mx-auto">
         <div className="px-5 md:px-8 pt-12 md:pt-24 pb-6">
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-ink mb-1">
+          <h1 className="font-display text-2xl md:text-4xl font-bold text-ink dark:text-zinc-100 mb-1">
             Dari Bahan Yang Ada
           </h1>
-          <p className="font-body text-sm text-ink-muted">
+          <p className="font-body text-sm text-ink-muted dark:text-zinc-400">
             Pilih bahan, kami carikan resepnya
           </p>
         </div>
@@ -73,8 +73,12 @@ export default function IngredientsPage() {
                   onChange={(e) => setCustomInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && addCustom()}
                   placeholder="Tambah bahan lain..."
-                  className="flex-1 px-4 py-3 bg-white border border-gray-100 rounded-2xl font-body text-sm text-ink shadow-card
-                             placeholder:text-ink-faint focus:outline-none focus:border-brand-300 focus:ring-2 focus:ring-brand-100 transition-all"
+                  className="flex-1 px-4 py-3 bg-white dark:bg-zinc-800
+                             border border-gray-100 dark:border-zinc-700 rounded-2xl
+                             font-body text-sm text-ink dark:text-zinc-100 shadow-card
+                             placeholder:text-ink-faint dark:placeholder:text-zinc-500
+                             focus:outline-none focus:border-brand-300 dark:focus:border-brand-600
+                             focus:ring-2 focus:ring-brand-100 dark:focus:ring-brand-900/50 transition-all"
                 />
                 <button
                   onClick={addCustom}
@@ -89,7 +93,7 @@ export default function IngredientsPage() {
 
             {/* Popular Ingredients */}
             <div className="px-5 md:px-0 mb-6">
-              <p className="font-body text-xs text-ink-muted font-medium uppercase tracking-widest mb-3">
+              <p className="font-body text-xs text-ink-muted dark:text-zinc-400 font-medium uppercase tracking-widest mb-3">
                 Bahan Populer
               </p>
               <div className="flex flex-wrap gap-2">
@@ -101,7 +105,7 @@ export default function IngredientsPage() {
                       ${
                         selected.includes(ing)
                           ? 'bg-brand-600 text-white shadow-md scale-[1.03]'
-                          : 'bg-white text-ink-muted border border-gray-100 shadow-card hover:border-brand-200'
+                          : 'bg-white dark:bg-zinc-800 text-ink-muted dark:text-zinc-400 border border-gray-100 dark:border-zinc-700 shadow-card hover:border-brand-200 dark:hover:border-brand-700'
                       }`}
                   >
                     {ing}
@@ -113,21 +117,21 @@ export default function IngredientsPage() {
             {/* Selected */}
             {selected.length > 0 && (
               <div className="px-5 md:px-0 mb-5">
-                <p className="font-body text-xs text-ink-muted font-medium uppercase tracking-widest mb-3">
+                <p className="font-body text-xs text-ink-muted dark:text-zinc-400 font-medium uppercase tracking-widest mb-3">
                   Bahan Dipilih ({selected.length})
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {selected.map((ing) => (
                     <span
                       key={ing}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-50 text-accent-700 rounded-full text-sm font-body font-semibold border border-accent-200 shadow-sm"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-accent-50 dark:bg-accent-900/30 text-accent-700 dark:text-accent-400 rounded-full text-sm font-body font-semibold border border-accent-200 dark:border-accent-800 shadow-sm"
                     >
                       {ing}
                       <button
                         onClick={() =>
                           setSelected((prev) => prev.filter((i) => i !== ing))
                         }
-                        className="text-accent-400 hover:text-accent-700 transition-colors ml-0.5"
+                        className="text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors ml-0.5"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -208,10 +212,10 @@ export default function IngredientsPage() {
               ingredientResults.length === 0 && (
                 <div className="text-center py-12">
                   <div className="text-5xl mb-4">😅</div>
-                  <p className="font-body font-semibold text-ink">
+                  <p className="font-body font-semibold text-ink dark:text-zinc-100">
                     Tidak ada resep cocok
                   </p>
-                  <p className="font-body text-ink-muted text-sm mt-1">
+                  <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mt-1">
                     Coba kurangi jumlah bahan
                   </p>
                 </div>
@@ -219,8 +223,8 @@ export default function IngredientsPage() {
 
             {!loading.ingredient && ingredientResults.length > 0 && (
               <>
-                <p className="font-body text-sm text-ink-muted mb-3">
-                  <span className="font-semibold text-ink">
+                <p className="font-body text-sm text-ink-muted dark:text-zinc-400 mb-3">
+                  <span className="font-semibold text-ink dark:text-zinc-100">
                     {ingredientResults.length}
                   </span>{' '}
                   resep ditemukan
@@ -236,8 +240,8 @@ export default function IngredientsPage() {
             {!searched && ingredientResults.length === 0 && (
               <div className="hidden md:flex flex-col items-center justify-center py-24 text-center">
                 <div className="relative w-24 h-24 mx-auto mb-5">
-                  <div className="absolute inset-0 bg-brand-50 rounded-full" />
-                  <div className="absolute inset-2 bg-brand-100 rounded-full" />
+                  <div className="absolute inset-0 bg-brand-50 dark:bg-brand-900/30 rounded-full" />
+                  <div className="absolute inset-2 bg-brand-100 dark:bg-brand-800/40 rounded-full" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -255,10 +259,10 @@ export default function IngredientsPage() {
                     </svg>
                   </div>
                 </div>
-                <p className="font-body font-semibold text-ink">
+                <p className="font-body font-semibold text-ink dark:text-zinc-100">
                   Pilih bahan dulu
                 </p>
-                <p className="font-body text-ink-muted text-sm mt-1">
+                <p className="font-body text-ink-muted dark:text-zinc-400 text-sm mt-1">
                   Pilih bahan dari kiri, lalu klik Carikan Resep
                 </p>
               </div>

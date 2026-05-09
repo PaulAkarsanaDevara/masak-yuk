@@ -23,7 +23,7 @@ export default function RecipeDetailPage() {
 
   if (loading.detail) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center">
+      <div className="min-h-screen bg-surface dark:bg-zinc-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <svg
             className="animate-spin-slow w-10 h-10 text-brand-600"
@@ -45,7 +45,7 @@ export default function RecipeDetailPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
             />
           </svg>
-          <p className="font-body text-ink-muted text-sm">Memuat resep...</p>
+          <p className="font-body text-ink-muted dark:text-zinc-400 text-sm">Memuat resep...</p>
         </div>
       </div>
     );
@@ -60,13 +60,15 @@ export default function RecipeDetailPage() {
     .filter((s) => s.length > 10);
 
   return (
-    <div className="min-h-screen bg-surface pb-10 md:pb-16">
+    <div className="min-h-screen bg-surface dark:bg-zinc-900 pb-10 md:pb-16">
       {/* Desktop: top bar with back + fav */}
-      <div className="hidden md:flex fixed top-16 left-0 right-0 z-40 bg-surface/80 backdrop-blur-sm border-b border-gray-100/60">
+      <div className="hidden md:flex fixed top-16 left-0 right-0 z-40
+                      bg-surface/80 dark:bg-zinc-900/80 backdrop-blur-sm
+                      border-b border-gray-100/60 dark:border-zinc-700/60">
         <div className="max-w-5xl mx-auto w-full flex items-center justify-between px-8 py-3">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-ink-muted hover:text-ink transition-colors font-body text-sm font-medium"
+            className="flex items-center gap-2 text-ink-muted dark:text-zinc-400 hover:text-ink dark:hover:text-zinc-100 transition-colors font-body text-sm font-medium"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,8 +99,8 @@ export default function RecipeDetailPage() {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl font-body text-sm font-medium transition-all
               ${
                 isFav
-                  ? 'bg-rose-50 text-rose-600 border border-rose-200'
-                  : 'bg-white text-ink-muted border border-gray-200 hover:border-rose-200 hover:text-rose-500'
+                  ? 'bg-rose-50 dark:bg-rose-900/30 text-rose-600 border border-rose-200 dark:border-rose-800'
+                  : 'bg-white dark:bg-zinc-800 text-ink-muted dark:text-zinc-400 border border-gray-200 dark:border-zinc-600 hover:border-rose-200 dark:hover:border-rose-800 hover:text-rose-500'
               }`}
           >
             <svg
@@ -181,16 +183,16 @@ export default function RecipeDetailPage() {
 
       {/* Mobile: content */}
       <div className="md:hidden px-5 -mt-6 relative z-10">
-        <div className="bg-white rounded-3xl shadow-card p-5 mb-4">
+        <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-5 mb-4">
           <div className="flex gap-2 mb-3">
-            <span className="text-xs font-body font-semibold bg-brand-50 text-brand-700 px-3 py-1 rounded-full border border-brand-100">
+            <span className="text-xs font-body font-semibold bg-brand-50 dark:bg-brand-900/40 text-brand-700 px-3 py-1 rounded-full border border-brand-100 dark:border-brand-800">
               {currentMeal.strCategory}
             </span>
-            <span className="text-xs font-body font-medium bg-gray-100 text-ink-muted px-3 py-1 rounded-full">
+            <span className="text-xs font-body font-medium bg-gray-100 dark:bg-zinc-700 text-ink-muted dark:text-zinc-400 px-3 py-1 rounded-full">
               {currentMeal.strArea}
             </span>
           </div>
-          <h1 className="font-display text-2xl font-bold text-ink leading-tight mb-3">
+          <h1 className="font-display text-2xl font-bold text-ink dark:text-zinc-100 leading-tight mb-3">
             {currentMeal.strMeal}
           </h1>
           {currentMeal.strTags && (
@@ -198,7 +200,7 @@ export default function RecipeDetailPage() {
               {currentMeal.strTags.split(',').map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs font-body text-ink-faint bg-surface-muted px-2 py-0.5 rounded-full"
+                  className="text-xs font-body text-ink-faint dark:text-zinc-500 bg-surface-muted dark:bg-zinc-700 px-2 py-0.5 rounded-full"
                 >
                   #{tag.trim()}
                 </span>
@@ -207,10 +209,10 @@ export default function RecipeDetailPage() {
           )}
         </div>
 
-        <div className="bg-white rounded-3xl shadow-card p-5 mb-4">
-          <h2 className="font-display text-lg font-bold text-ink mb-4">
+        <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-5 mb-4">
+          <h2 className="font-display text-lg font-bold text-ink dark:text-zinc-100 mb-4">
             Bahan-bahan
-            <span className="font-body font-normal text-sm text-ink-muted ml-2">
+            <span className="font-body font-normal text-sm text-ink-muted dark:text-zinc-400 ml-2">
               ({ingredients.length} bahan)
             </span>
           </h2>
@@ -218,14 +220,14 @@ export default function RecipeDetailPage() {
             {ingredients.map((ing) => (
               <div
                 key={ing.name}
-                className="flex items-start gap-2.5 p-2.5 bg-surface-muted rounded-xl border-l-2 border-brand-400"
+                className="flex items-start gap-2.5 p-2.5 bg-surface-muted dark:bg-zinc-700 rounded-xl border-l-2 border-brand-400"
               >
                 <div>
-                  <p className="font-body text-sm font-semibold text-ink leading-tight">
+                  <p className="font-body text-sm font-semibold text-ink dark:text-zinc-100 leading-tight">
                     {ing.name}
                   </p>
                   {ing.measure && (
-                    <p className="font-body text-xs text-ink-muted">
+                    <p className="font-body text-xs text-ink-muted dark:text-zinc-400">
                       {ing.measure}
                     </p>
                   )}
@@ -235,15 +237,15 @@ export default function RecipeDetailPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-card p-5 mb-4">
-          <h2 className="font-display text-lg font-bold text-ink mb-4">
+        <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-5 mb-4">
+          <h2 className="font-display text-lg font-bold text-ink dark:text-zinc-100 mb-4">
             Cara Membuat
           </h2>
           <div className="flex flex-col">
             {steps.map((step, i) => (
               <div
                 key={i}
-                className={`flex gap-3 py-4 ${i < steps.length - 1 ? 'border-b border-gray-100' : ''}`}
+                className={`flex gap-3 py-4 ${i < steps.length - 1 ? 'border-b border-gray-100 dark:border-zinc-700' : ''}`}
               >
                 <div
                   className="w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center
@@ -251,7 +253,7 @@ export default function RecipeDetailPage() {
                 >
                   {i + 1}
                 </div>
-                <p className="font-body text-sm text-ink leading-relaxed">
+                <p className="font-body text-sm text-ink dark:text-zinc-200 leading-relaxed">
                   {step}
                 </p>
               </div>
@@ -297,16 +299,16 @@ export default function RecipeDetailPage() {
                 />
               </div>
 
-              <div className="bg-white rounded-3xl shadow-card p-5 mb-4">
+              <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-5 mb-4">
                 <div className="flex gap-2 mb-3">
-                  <span className="text-xs font-body font-semibold bg-brand-50 text-brand-700 px-3 py-1 rounded-full border border-brand-100">
+                  <span className="text-xs font-body font-semibold bg-brand-50 dark:bg-brand-900/40 text-brand-700 px-3 py-1 rounded-full border border-brand-100 dark:border-brand-800">
                     {currentMeal.strCategory}
                   </span>
-                  <span className="text-xs font-body font-medium bg-gray-100 text-ink-muted px-3 py-1 rounded-full">
+                  <span className="text-xs font-body font-medium bg-gray-100 dark:bg-zinc-700 text-ink-muted dark:text-zinc-400 px-3 py-1 rounded-full">
                     {currentMeal.strArea}
                   </span>
                 </div>
-                <h1 className="font-display text-2xl font-bold text-ink leading-tight mb-3">
+                <h1 className="font-display text-2xl font-bold text-ink dark:text-zinc-100 leading-tight mb-3">
                   {currentMeal.strMeal}
                 </h1>
                 {currentMeal.strTags && (
@@ -314,7 +316,7 @@ export default function RecipeDetailPage() {
                     {currentMeal.strTags.split(',').map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-body text-ink-faint bg-surface-muted px-2 py-0.5 rounded-full"
+                        className="text-xs font-body text-ink-faint dark:text-zinc-500 bg-surface-muted dark:bg-zinc-700 px-2 py-0.5 rounded-full"
                       >
                         #{tag.trim()}
                       </span>
@@ -346,10 +348,10 @@ export default function RecipeDetailPage() {
 
             {/* Right: ingredients + instructions */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-3xl shadow-card p-6 mb-4">
-                <h2 className="font-display text-xl font-bold text-ink mb-4">
+              <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-6 mb-4">
+                <h2 className="font-display text-xl font-bold text-ink dark:text-zinc-100 mb-4">
                   Bahan-bahan
-                  <span className="font-body font-normal text-sm text-ink-muted ml-2">
+                  <span className="font-body font-normal text-sm text-ink-muted dark:text-zinc-400 ml-2">
                     ({ingredients.length} bahan)
                   </span>
                 </h2>
@@ -357,14 +359,14 @@ export default function RecipeDetailPage() {
                   {ingredients.map((ing) => (
                     <div
                       key={ing.name}
-                      className="flex items-start gap-2.5 p-2.5 bg-surface-muted rounded-xl border-l-2 border-brand-400"
+                      className="flex items-start gap-2.5 p-2.5 bg-surface-muted dark:bg-zinc-700 rounded-xl border-l-2 border-brand-400"
                     >
                       <div>
-                        <p className="font-body text-sm font-semibold text-ink leading-tight">
+                        <p className="font-body text-sm font-semibold text-ink dark:text-zinc-100 leading-tight">
                           {ing.name}
                         </p>
                         {ing.measure && (
-                          <p className="font-body text-xs text-ink-muted">
+                          <p className="font-body text-xs text-ink-muted dark:text-zinc-400">
                             {ing.measure}
                           </p>
                         )}
@@ -374,15 +376,15 @@ export default function RecipeDetailPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-3xl shadow-card p-6">
-                <h2 className="font-display text-xl font-bold text-ink mb-4">
+              <div className="bg-white dark:bg-zinc-800 rounded-3xl shadow-card p-6">
+                <h2 className="font-display text-xl font-bold text-ink dark:text-zinc-100 mb-4">
                   Cara Membuat
                 </h2>
                 <div className="flex flex-col">
                   {steps.map((step, i) => (
                     <div
                       key={i}
-                      className={`flex gap-4 py-4 ${i < steps.length - 1 ? 'border-b border-gray-100' : ''}`}
+                      className={`flex gap-4 py-4 ${i < steps.length - 1 ? 'border-b border-gray-100 dark:border-zinc-700' : ''}`}
                     >
                       <div
                         className="w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center
@@ -390,7 +392,7 @@ export default function RecipeDetailPage() {
                       >
                         {i + 1}
                       </div>
-                      <p className="font-body text-sm text-ink leading-relaxed">
+                      <p className="font-body text-sm text-ink dark:text-zinc-200 leading-relaxed">
                         {step}
                       </p>
                     </div>

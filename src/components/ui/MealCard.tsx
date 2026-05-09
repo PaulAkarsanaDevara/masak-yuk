@@ -19,7 +19,8 @@ export default function MealCard({ meal, index = 0 }: MealCardProps) {
 
   return (
     <div
-      className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100/80 cursor-pointer
+      className="group relative bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden
+                 border border-gray-100/80 dark:border-zinc-700/80 cursor-pointer
                  shadow-card hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 animate-slide-up"
       style={{ animationDelay: delay }}
       onClick={() => navigate(`/recipe/${meal.idMeal}`)}
@@ -40,14 +41,15 @@ export default function MealCard({ meal, index = 0 }: MealCardProps) {
             e.stopPropagation();
             dispatch(toggleFavorite(meal));
           }}
-          className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-sm
+          className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full
+                     bg-white/95 dark:bg-zinc-800/95 backdrop-blur-sm
                      flex items-center justify-center shadow-md hover:scale-110 active:scale-95 transition-transform"
           aria-label={isFav ? 'Hapus dari favorit' : 'Tambah ke favorit'}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className={`w-4 h-4 transition-colors ${isFav ? 'fill-rose-500 stroke-rose-500' : 'fill-none stroke-gray-400'}`}
+            className={`w-4 h-4 transition-colors ${isFav ? 'fill-rose-500 stroke-rose-500' : 'fill-none stroke-gray-400 dark:stroke-zinc-400'}`}
             strokeWidth={2}
           >
             <path
@@ -59,7 +61,7 @@ export default function MealCard({ meal, index = 0 }: MealCardProps) {
         </button>
       </div>
       <div className="p-3.5">
-        <h3 className="font-body font-semibold text-ink text-sm leading-snug line-clamp-2">
+        <h3 className="font-body font-semibold text-ink dark:text-zinc-100 text-sm leading-snug line-clamp-2">
           {meal.strMeal}
         </h3>
       </div>
