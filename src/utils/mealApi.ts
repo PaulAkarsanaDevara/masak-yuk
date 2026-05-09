@@ -6,6 +6,7 @@ import type {
   Meal,
   Category,
 } from '@/types'
+import { LOCAL_RECIPE_MAP } from '@/data/indonesianRecipes'
 
 const BASE_URL = 'https://www.themealdb.com/api/json/v1/1'
 
@@ -17,6 +18,7 @@ export const mealApi = {
   },
 
   getById: async (id: string): Promise<Meal | null> => {
+    if (id.startsWith('local-')) return LOCAL_RECIPE_MAP.get(id) ?? null
     const res = await fetch(`${BASE_URL}/lookup.php?i=${id}`)
     const data: MealDetailResponse = await res.json()
     return data.meals?.[0] ?? null

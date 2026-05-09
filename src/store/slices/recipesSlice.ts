@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
 import type { MealSummary, Meal, Category } from '@/types'
 import { mealApi } from '@/utils/mealApi'
+import { INDONESIAN_RECIPES, LOCAL_RECIPE_MAP } from '@/data/indonesianRecipes'
 
-// Keywords yang kemungkinan besar ada di TheMealDB
 const INDONESIAN_KEYWORDS = [
-  'nasi', 'rendang', 'satay', 'sate', 'gado', 'laksa', 'pandan', 'ayam goreng',
+  'nasi', 'rendang', 'satay', 'sate', 'gado', 'soto', 'bakso', 'pandan', 'laksa', 'ayam goreng',
 ]
 
 interface RecipesState {
@@ -85,23 +85,45 @@ export const fetchByIngredient = createAsyncThunk(
 export const fetchIndonesianMeals = createAsyncThunk(
   'recipes/fetchIndonesian',
   async () => {
-    // Cari semua keyword secara paralel
     const results = await Promise.allSettled(
       INDONESIAN_KEYWORDS.map((kw) => mealApi.search(kw))
     )
-    // Gabungkan, deduplikasi berdasarkan idMeal
-    const seen = new Set<string>()
-    const combined: MealSummary[] = []
+
+    const apiMeals: MealSummary[] = []
+    const seenApi = new Set<string>()
     for (const result of results) {
       if (result.status === 'fulfilled') {
         for (const meal of result.value) {
-          if (!seen.has(meal.idMeal)) {
-            seen.add(meal.idMeal)
-            combined.push(meal)
+          if (!seenApi.has(meal.idMeal)) {
+            seenApi.add(meal.idMeal)
+            apiMeals.push(meal)
           }
         }
       }
     }
+
+    const seen = new Set<string>()
+    const combined: MealSummary[] = []
+
+    for (const localMeal of INDONESIAN_RECIPES) {
+      seen.add(localMeal.idMeal)
+      const keywords = localMeal.strMeal.toLowerCase().split(/[\s-]+/).filter((k) => k.length > 3)
+      const match = apiMeals.find((api) =>
+        keywords.some((kw) => api.strMeal.toLowerCase().includes(kw))
+      )
+      const resolvedThumb = match?.strMealThumb ?? localMeal.strMealThumb
+      const entry = LOCAL_RECIPE_MAP.get(localMeal.idMeal)
+      if (entry && match) entry.strMealThumb = resolvedThumb
+      combined.push({ idMeal: localMeal.idMeal, strMeal: localMeal.strMeal, strMealThumb: resolvedThumb })
+    }
+
+    for (const apiMeal of apiMeals) {
+      if (!seen.has(apiMeal.idMeal)) {
+        seen.add(apiMeal.idMeal)
+        combined.push(apiMeal)
+      }
+    }
+
     return combined
   }
 )

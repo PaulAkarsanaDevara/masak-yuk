@@ -34,7 +34,20 @@ export default function MealCard({ meal, index = 0 }: MealCardProps) {
           decoding="async"
           width={220}
           height={165}
+          onError={(e) => {
+            const target = e.currentTarget;
+            target.style.display = 'none';
+            const placeholder = target.nextElementSibling as HTMLElement | null;
+            if (placeholder) placeholder.style.display = 'flex';
+          }}
         />
+        <div
+          className="w-full h-full bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/40 dark:to-brand-800/60
+                     items-center justify-center text-4xl hidden absolute inset-0"
+          aria-hidden
+        >
+          🍽️
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
         <button
           onClick={(e) => {

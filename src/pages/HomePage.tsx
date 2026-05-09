@@ -192,14 +192,27 @@ export default function HomePage() {
                       style={{ animationDelay: `${i * 50}ms` }}
                       onClick={() => navigate(`/recipe/${meal.idMeal}`)}
                     >
-                      <div className="aspect-[4/3] overflow-hidden">
+                      <div className="aspect-[4/3] overflow-hidden relative">
                         <img
                           src={`${meal.strMealThumb}/preview`}
                           alt={meal.strMeal}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           loading="lazy"
                           decoding="async"
+                          onError={(e) => {
+                            const t = e.currentTarget;
+                            t.style.display = 'none';
+                            const p = t.nextElementSibling as HTMLElement | null;
+                            if (p) p.style.display = 'flex';
+                          }}
                         />
+                        <div
+                          className="absolute inset-0 bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/40 dark:to-brand-800/60
+                                     items-center justify-center text-3xl hidden"
+                          aria-hidden
+                        >
+                          🍽️
+                        </div>
                       </div>
                       <div className="p-2.5">
                         <p className="font-body font-semibold text-ink dark:text-zinc-100 text-xs leading-snug line-clamp-2">
