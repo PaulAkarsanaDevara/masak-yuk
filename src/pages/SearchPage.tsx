@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { searchMeals, setSearchQuery } from '@/store/slices/recipesSlice';
 import MealCard from '@/components/ui/MealCard';
 
 export default function SearchPage() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const { searchResults, searchQuery, loading } = useAppSelector(
     (s) => s.recipes,
   );
@@ -14,6 +16,13 @@ export default function SearchPage() {
 
   useEffect(() => {
     inputRef.current?.focus();
+    // Baca query dari URL (misal: /search?q=nasi)
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (q && q !== input) {
+      handleChange(q);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (val: string) => {

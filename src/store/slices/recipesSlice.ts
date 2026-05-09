@@ -2,10 +2,16 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 import type { MealSummary, Meal, Category } from '@/types'
 import { mealApi } from '@/utils/mealApi'
 
+// Keywords yang kemungkinan besar ada di TheMealDB
+const INDONESIAN_KEYWORDS = [
+  'nasi', 'rendang', 'satay', 'sate', 'gado', 'laksa', 'pandan', 'ayam goreng',
+]
+
 interface RecipesState {
   searchResults: MealSummary[]
   categoryResults: MealSummary[]
   ingredientResults: MealSummary[]
+  indonesianResults: MealSummary[]
   currentMeal: Meal | null
   randomMeal: Meal | null
   categories: Category[]
@@ -17,6 +23,7 @@ interface RecipesState {
     categories: boolean
     random: boolean
     ingredient: boolean
+    indonesian: boolean
   }
   error: string | null
 }
@@ -25,6 +32,7 @@ const initialState: RecipesState = {
   searchResults: [],
   categoryResults: [],
   ingredientResults: [],
+  indonesianResults: [],
   currentMeal: null,
   randomMeal: null,
   categories: [],
@@ -36,6 +44,7 @@ const initialState: RecipesState = {
     categories: false,
     random: false,
     ingredient: false,
+    indonesian: false,
   },
   error: null,
 }
@@ -64,13 +73,36 @@ export const fetchByIngredient = createAsyncThunk(
   'recipes/fetchByIngredient',
   async (ingredients: string[]) => {
     const results = await Promise.all(ingredients.map((i) => mealApi.getByIngredient(i)))
-    // Intersect: meals that appear in ALL ingredient results
     if (results.length === 0) return []
     const [first, ...rest] = results
     const intersected = first.filter((meal) =>
       rest.every((r) => r.some((m) => m.idMeal === meal.idMeal))
     )
     return intersected.length > 0 ? intersected : results.flat().slice(0, 20)
+  }
+)
+
+export const fetchIndonesianMeals = createAsyncThunk(
+  'recipes/fetchIndonesian',
+  async () => {
+    // Cari semua keyword secara paralel
+    const results = await Promise.allSettled(
+      INDONESIAN_KEYWORDS.map((kw) => mealApi.search(kw))
+    )
+    // Gabungkan, deduplikasi berdasarkan idMeal
+    const seen = new Set<string>()
+    const combined: MealSummary[] = []
+    for (const result of results) {
+      if (result.status === 'fulfilled') {
+        for (const meal of result.value) {
+          if (!seen.has(meal.idMeal)) {
+            seen.add(meal.idMeal)
+            combined.push(meal)
+          }
+        }
+      }
+    }
+    return combined
   }
 )
 
@@ -150,6 +182,17 @@ const recipesSlice = createSlice({
       .addCase(fetchByIngredient.rejected, (state) => {
         state.loading.ingredient = false
         state.error = 'Gagal mencari berdasarkan bahan'
+      })
+      // indonesian
+      .addCase(fetchIndonesianMeals.pending, (state) => {
+        state.loading.indonesian = true
+      })
+      .addCase(fetchIndonesianMeals.fulfilled, (state, action) => {
+        state.loading.indonesian = false
+        state.indonesianResults = action.payload
+      })
+      .addCase(fetchIndonesianMeals.rejected, (state) => {
+        state.loading.indonesian = false
       })
   },
 })
